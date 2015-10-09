@@ -1,0 +1,8 @@
+title: titolo B
+content: >
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras felis eros, vehicula eu purus ut, mollis cursus dui.
+  In in faucibus justo, ut iaculis neque. Donec consequat, ipsum quis condimentum tincidunt, lectus odio ultricies ex, at faucibus ligula nisl sed mi. Aliquam erat volutpat. Nulla hendrerit, est id condimentum egestas, eros eros eleifend dolor, egestas accumsan ex neque eget urna. Mauris et lectus sed tellus laoreet blandit sit amet et magna.
+  Curabitur sed convallis sem.
+links:
+- id: 1
+  url: 'http://www.alessiozappa.com'
