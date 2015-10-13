@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "antima": "./bin/antima.js"
+    "antima": "./antima.js"
   },
   "author": "",
   "license": "ISC",
