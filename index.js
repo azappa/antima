@@ -41,11 +41,8 @@ if (!yamls || yamls.length === 0) {
   return;
 }
 
-
-//  -- removing and recreating folders --
-del.sync([htmlDir]);
-fs.mkdirSync(htmlDir);
-
+//  -- removing old HTML files --
+del.sync([htmlDir + '/*.html']);
 
 //  -- array for sitemap links --
 var sitemap = [];
