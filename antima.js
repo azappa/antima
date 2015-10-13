@@ -23,8 +23,8 @@ if (!argv.template || argv.template === '') {
 //  -- variables --
 var template = argv.template;
 var yamlPath = './' + template + '/source';
-var htmlDir = './' + template;
-var templateDir = './' + template + '/template';
+var htmlPath = './' + template;
+var templatePath = './' + template + '/template';
 
 
 //  -- check if folder with json files exists --
@@ -44,26 +44,39 @@ if (!yamls || yamls.length === 0) {
 }
 
 //  -- removing old HTML files --
-del.sync([htmlDir + '/*.html']);
+del.sync([htmlPath + '/*.html']);
 
 //  -- array for sitemap links --
 var sitemap = [];
+var sitemapConfig;
+
+if (fs.existsSync(templatePath + '/sitemap.config.json')) {
+  sitemapConfig = fs.readFileSync(templatePath + '/sitemap.config.json', 'utf-8');
+  sitemapConfig = JSON.parse(sitemapConfig).keys;
+}
 
 
 //  -- generating sitemap --
 yamls.forEach(function (file) {
   var yamlSource = yaml.load(yamlPath + '/' + file);
-
-  sitemap.push({
-    path: htmlDir + '/' + file.replace('.yaml', '.html'),
-    title: yamlSource.title 
-  });
+  
+  var sitemapItem = {
+    path: htmlPath + '/' + file.replace('.yaml', '.html')
+  };
+  
+  if (sitemapConfig) {
+    sitemapConfig.forEach(function (k) {
+      sitemapItem[k] = yamlSource[k];
+    });
+  }
+  
+  sitemap.push(sitemapItem);
 });
 
 
 //  -- writing sitemap into a jade file --
 fs.writeFileSync(
-  templateDir + '/sitemap.jade',
+  templatePath + '/sitemap.jade',
   '- var sitemap = ' + JSON.stringify(sitemap),
   'utf-8'
 );
@@ -73,13 +86,13 @@ fs.writeFileSync(
 yamls.forEach(function (file) {
   var yamlSource = yaml.load(yamlPath + '/' + file);
   var html = jade.renderFile(
-    templateDir + '/' + template + '.jade', {
+    templatePath + '/' + template + '.jade', {
       data: yamlSource
     }
   );
 
   fs.writeFileSync(
-    htmlDir + '/' + file.replace('.yaml', '.html'),
+    htmlPath + '/' + file.replace('.yaml', '.html'),
     html,
     'utf-8'
   );
