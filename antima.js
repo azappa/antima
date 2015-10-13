@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*jshint node:true, eqnull:true, laxcomma:true, undef:true, indent:2, camelcase:false */
 'use strict';
 
