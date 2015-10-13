@@ -19,10 +19,10 @@ if (!argv.template || argv.template === '') {
 
 
 //  -- variables --
-var _template = argv.template;
-var yamlPath = './' + _template + '-source';
-var htmlDir = './' + _template;
-var templateDir = './_templates';
+var template = argv.template;
+var yamlPath = './' + template + '/source';
+var htmlDir = './' + template;
+var templateDir = './' + template + '/template';
 
 
 //  -- check if folder with json files exists --
@@ -48,15 +48,15 @@ fs.mkdirSync(htmlDir);
 
 
 //  -- array for sitemap links --
-var _sitemap = [];
+var sitemap = [];
 
 
 //  -- generating sitemap --
 yamls.forEach(function (file) {
   var yamlSource = yaml.load(yamlPath + '/' + file);
 
-  _sitemap.push({
-    path: file.replace('.yaml', '.html'),
+  sitemap.push({
+    path: htmlDir + '/' + file.replace('.yaml', '.html'),
     title: yamlSource.title 
   });
 });
@@ -64,8 +64,8 @@ yamls.forEach(function (file) {
 
 //  -- writing sitemap into a jade file --
 fs.writeFileSync(
-  './_templates/' + _template + '-sitemap.jade',
-  '- var sitemap = ' + JSON.stringify(_sitemap),
+  templateDir + '/sitemap.jade',
+  '- var sitemap = ' + JSON.stringify(sitemap),
   'utf-8'
 );
 
@@ -74,7 +74,7 @@ fs.writeFileSync(
 yamls.forEach(function (file) {
   var yamlSource = yaml.load(yamlPath + '/' + file);
   var html = jade.renderFile(
-    templateDir + '/' + _template + '.jade', {
+    templateDir + '/' + template + '.jade', {
       data: yamlSource
     }
   );
