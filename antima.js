@@ -87,7 +87,8 @@ yamls.forEach(function (file) {
   var yamlSource = yaml.load(yamlPath + '/' + file);
   var html = jade.renderFile(
     templatePath + '/' + template + '.jade', {
-      data: yamlSource
+      data: yamlSource,
+      fileName: file.replace('.yaml', '')
     }
   );
 
