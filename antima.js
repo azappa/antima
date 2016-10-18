@@ -7,7 +7,7 @@
 //  -- node modules --
 var fs = require('fs');
 var del = require('del');
-var jade = require('jade');
+var pug = require('pug');
 var argv = require('yargs').argv;
 var yaml = require('yamljs');
 
@@ -43,6 +43,7 @@ if (!yamls || yamls.length === 0) {
   return;
 }
 
+
 //  -- removing old HTML files --
 del.sync([htmlPath + '/*.html']);
 
@@ -55,8 +56,8 @@ if (fs.existsSync(templatePath + '/sitemap.config.json')) {
   sitemapConfig = JSON.parse(sitemapConfig).keys;
 }
 
-
 //  -- generating sitemap --
+yamls = yamls.filter(function (y) { return y.indexOf('.yaml') !== -1; });
 yamls.forEach(function (file) {
   var yamlSource = yaml.load(yamlPath + '/' + file);
   
@@ -74,19 +75,19 @@ yamls.forEach(function (file) {
 });
 
 
-//  -- writing sitemap into a jade file --
+//  -- writing sitemap into a pug file --
 fs.writeFileSync(
-  templatePath + '/sitemap.jade',
+  templatePath + '/sitemap.pug',
   '- var sitemap = ' + JSON.stringify(sitemap),
   'utf-8'
 );
 
 
-// -- build html pages from jade template --
+// -- build html pages from pug template --
 yamls.forEach(function (file) {
   var yamlSource = yaml.load(yamlPath + '/' + file);
-  var html = jade.renderFile(
-    templatePath + '/' + template + '.jade', {
+  var html = pug.renderFile(
+    templatePath + '/' + template + '.pug', {
       data: yamlSource,
       fileName: file.replace('.yaml', '')
     }
@@ -98,4 +99,3 @@ yamls.forEach(function (file) {
     'utf-8'
   );
 });
-
