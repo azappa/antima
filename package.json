@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node antima.js --template projects"
   },
   "bin": {
     "antima": "./antima.js"
@@ -13,7 +13,10 @@
   "license": "ISC",
   "dependencies": {
     "del": "^2.0.2",
-    "jade": "^1.11.0",
+    "jstransformer-markdown": "^1.1.0",
+    "marked": "^0.3.6",
+    "pug": "^2.0.0-beta6",
+    "pug-cli": "^1.0.0-alpha6",
     "yamljs": "^0.2.4",
     "yargs": "^3.27.0"
   }
