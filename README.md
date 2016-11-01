@@ -1,9 +1,7 @@
-## Antima
-> Gravity (グラビデ, Gurabide?), also known as Demi, is a recurring fractional damage spell from the Final Fantasy series. In a few games it appears in, its a Gravity-elemental spell. It cuts an enemy's HP by a specific amount, usually by 50% or 25%, although this depends on the game. The number of targets it affects is also game dependent.
->
-> ![](http://vignette3.wikia.nocookie.net/finalfantasy/images/e/ed/FFX_Demi.png/revision/latest?cb=20111222035851)
->
-> __Antima__ is the translation of english term Gravity (or Demi in _Final Fantasy X).
+![](antima-logo.png)
+
+> Gravity (グラビデ, Gurabide?), also known as Demi, is a recurring fractional damage spell from the Final Fantasy series. In a few games it appears in, its a Gravity-elemental spell. It cuts an enemy's HP by a specific amount, usually by 50% or 25%, although this depends on the game. The number of targets it affects is also game dependent.  
+__Antima__ is the translation of english term Gravity (or Demi in _Final Fantasy X).
 
 
 #### but first... why another static site generator?
