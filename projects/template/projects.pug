@@ -1,6 +1,21 @@
-pre=JSON.stringify(fileName, null, 1)
-pre=JSON.stringify(data, null, 1)
+pre=`this is ${fileName}.html`
+
+h1=data.title
+p=data.content
+if data.coverImage
+  img(src=data.coverImage alt=data.title)
 
 include sitemap
 
+h5 pages list
+ul
+  each link in sitemap
+    li
+      a(href=link.fileName)
+        =link.title
+
+h4 Raw post data
+pre=JSON.stringify(data, null, 1)
+
+h4 Raw sitemap data
 pre=JSON.stringify(sitemap, null, 1)
